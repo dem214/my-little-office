@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    env_file: ./.envs/postgres
+    container_name: my-little-office_db
+    volumes: 
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+  
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-little-office_django
+    container_name: my-little-office_django
+    depends_on:
+      - db
+    env_file:
+      - ./.envs/postgres
+    volumes:
+      - .:/home/my-little-office:z
+    ports:
+      - "8000:8000"
+    command: /bin/bash /home/my-little-office/.start.sh
+
+volumes: 
+  postgres_data:

@@ -1,0 +1,5 @@
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+POSTGRES_DB=my-little-office
+POSTGRES_USER=my-little-office
+POSTGRES_PASSWORD=my-little-office
