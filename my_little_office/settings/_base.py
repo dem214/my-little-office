@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'mptt',
     'rest_framework',
     'drf_spectacular',
+    'django_filters',
     # Project apps
     'my_little_office.apps.staff.apps.StaffConfig',
 ]
@@ -141,4 +142,6 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend', ),
 }
