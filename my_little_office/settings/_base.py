@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third party apps
+    'mptt',
+    'rest_framework'
+    'drf_spectacular'
     # Project apps
+    'my_little_office.staff.apps.StaffConfig',
 ]
 
 MIDDLEWARE = [
