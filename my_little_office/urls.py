@@ -14,10 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import RedirectView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 
 admin.site.site_header = _('My Little Office Administration')
 
@@ -25,3 +26,7 @@ urlpatterns = [
     path('', RedirectView.as_view(pattern_name = 'admin:index'), name='index'),
     path('admin/', admin.site.urls),
 ]
+
+if "debug_toolbar" in settings.INSTALLED_APPS:
+    import debug_toolbar    
+    urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns

@@ -33,6 +33,7 @@ class Employee(MPTTModel):
         get_user_model(),
         on_delete=models.SET_NULL,
         null=True, blank=True)
+    # MPTT Additionaly add `level` field -- we can use it
     parent = TreeForeignKey(
         "self",
         on_delete=models.CASCADE,
