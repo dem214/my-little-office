@@ -6,11 +6,14 @@ from .models import Employee, Position
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
 
-    fields = ('second_name',
-                'first_name',
-                'patronim',
-                'salary',
-                'total_accrued')
+    fields = (
+        'second_name',
+        'first_name',
+        'patronim',
+        'position'
+        'salary',
+        'total_accrued'
+    )
 
     list_filters = ('position', 'level')
 
@@ -19,6 +22,6 @@ class EmployeeAdmin(admin.ModelAdmin):
     def clear_total_accrued(self, request, queryset):
         queryset.update(total_accrued=Decimal(0))
 
-@admin.register(Postion)
+@admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
     pass

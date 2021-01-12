@@ -1,17 +1,14 @@
 FROM python:3.9
 
-ENV PYTHONBUFFERED 1
+# ENV PYTHONBUFFERED 1
 
 RUN apt-get update
 # Install GnuText
 RUN apt-get install -y gettext
 
-RUN useradd -ms /bin/bash my-little-office
+WORKDIR /usr/src/app
 
-USER my-little-office
+COPY  ./requirements ./requirements
 
-WORKDIR /home/my-little-office
+RUN pip install --no-cache-dir -r requirements/dev.txt
 
-COPY --chown=my-little-office ./requirements/ /home/my-little-office/
-
-RUN pip install -r /home/my-little-office/dev.txt

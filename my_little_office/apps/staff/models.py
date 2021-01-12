@@ -19,13 +19,18 @@ class Employee(MPTTModel):
     salary = models.DecimalField(
         _('salary'),
         decimal_places=2,
+        max_digits=7,
         default=Decimal(0))
     total_accrued = models.DecimalField(
         _('total accrued'),
         decimal_places=2,
+        max_digits=10,
         default=Decimal(0),
         help_text=_('Amount of all accrued salary since start of recording'))
-    user = models.OneToOneField(get_user_model(), on_delete=models.SET_NULL)
+    user = models.OneToOneField(
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True)
     parent = TreeForeignKey(
         "self",
         on_delete=models.CASCADE,

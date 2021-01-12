@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 from django.core.exceptions import ImproperlyConfigured
 
@@ -42,10 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third party apps
     'mptt',
-    'rest_framework'
-    'drf_spectacular'
+    'rest_framework',
+    'drf_spectacular',
     # Project apps
-    'my_little_office.staff.apps.StaffConfig',
+    'my_little_office.apps.staff.apps.StaffConfig',
 ]
 
 MIDDLEWARE = [

@@ -19,11 +19,12 @@ services:
       - db
     env_file:
       - ./.envs/postgres
+      - ./.envs/django
     volumes:
-      - .:/home/my-little-office:z
+      - .:/usr/src/app:z
     ports:
       - "8000:8000"
-    command: /bin/bash /home/my-little-office/.start.sh
+    command: /usr/src/app/.start.sh
 
 volumes: 
   postgres_data:
