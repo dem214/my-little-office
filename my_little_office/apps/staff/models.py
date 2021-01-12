@@ -3,6 +3,8 @@ from decimal import Decimal
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django.utils.timezone import now
+from django.urls import reverse
 
 from mptt.models import MPTTModel
 from mptt.fields import TreeForeignKey
@@ -15,7 +17,7 @@ class Employee(MPTTModel):
         'Position',
         on_delete=models.CASCADE,
         verbose_name=_('position'))
-    employment_date = models.DateField(_('employment date'), auto_now=True)
+    employment_date = models.DateField(_('employment date'), default=now())
     salary = models.DecimalField(
         _('salary'),
         decimal_places=2,
@@ -30,12 +32,13 @@ class Employee(MPTTModel):
     user = models.OneToOneField(
         get_user_model(),
         on_delete=models.SET_NULL,
-        null=True)
+        null=True, blank=True)
     parent = TreeForeignKey(
         "self",
         on_delete=models.CASCADE,
         blank=True, null=True,
-        related_name=_('children'))
+        related_name=_('childrem'),
+        verbose_name=_('chief'))
 
     class Meta:
         ordering = ['tree_id', 'lft']
@@ -52,7 +55,12 @@ class Employee(MPTTModel):
                         self.patronim, '>'))
 
     def __str__(self):
+        return self.full_name
+
+    @property
+    def full_name(self) -> str:
         return ' '.join((self.second_name, self.first_name, self.patronim))
+
 
 
 class Position(models.Model):
