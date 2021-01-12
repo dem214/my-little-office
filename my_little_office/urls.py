@@ -20,11 +20,23 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
+from drf_spectacular.views import (
+    SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+)
+
+from .api_router import router
+
 admin.site.site_header = _('My Little Office Administration')
 
 urlpatterns = [
     path('', RedirectView.as_view(pattern_name = 'admin:index'), name='index'),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+    path('api/schema/', include([
+        path('', SpectacularAPIView.as_view(), name='schema'),
+        path('swagger-ui/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
+        path('redoc/', SpectacularRedocView.as_view(), name='redoc'),
+    ]))
 ]
 
 if "debug_toolbar" in settings.INSTALLED_APPS:
