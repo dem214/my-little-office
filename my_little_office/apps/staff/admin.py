@@ -46,6 +46,11 @@ class EmployeeAdmin(admin.ModelAdmin):
         queryset.update(total_accrued=Decimal(0))
     clear_total_accrued.short_description = _('Clear field "total accrued"')
 
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        queryset = queryset.select_related('parent')
+        return queryset
+
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
     pass
