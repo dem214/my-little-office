@@ -45,6 +45,15 @@ class Employee(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ('second_name', 'first_name')
 
+    def __repr__(self):
+        return ''.join(('<Employee: ',
+                        self.second_name, ' ',
+                        self.first_name, ' ',
+                        self.patronim, '>'))
+
+    def __str__(self):
+        return ' '.join((self.second_name, self.first_name, self.patronim))
+
 
 class Position(models.Model):
     name = models.CharField(_('name'), max_length=150, blank=True)
@@ -52,4 +61,10 @@ class Position(models.Model):
     class Meta:
         verbose_name = _('Position')
         verbose_name_plural = _('Positions')
+
+    def __repr__(self):
+        return ''.join(('<Position: ', self.name, '>'))
+
+    def __str__(self):
+        return self.name
 
