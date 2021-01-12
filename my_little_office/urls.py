@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+
+admin.site.site_header = _('My Little Office Administration')
 
 urlpatterns = [
+    path('', RedirectView.as_view(pattern_name = 'admin:index'), name='index'),
     path('admin/', admin.site.urls),
 ]

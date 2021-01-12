@@ -17,7 +17,7 @@ class Employee(MPTTModel):
         'Position',
         on_delete=models.CASCADE,
         verbose_name=_('position'))
-    employment_date = models.DateField(_('employment date'), default=now())
+    employment_date = models.DateField(_('employment date'), default=now)
     salary = models.DecimalField(
         _('salary'),
         decimal_places=2,

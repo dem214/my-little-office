@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import gettext_lazy as _
 
 def get_secret(setting):
     """Get the secret variable from env or raise the exception."""
@@ -119,7 +120,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+LANGUAGES = [
+    ('en-us', _('English')),
+    ('ru-ru', _('Russian'))
+]
+
+TIME_ZONE = 'Europe/Minsk'
 
 USE_I18N = True
 
