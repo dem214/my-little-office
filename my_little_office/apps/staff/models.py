@@ -63,6 +63,11 @@ class Employee(MPTTModel):
     def full_name(self) -> str:
         return ' '.join((self.second_name, self.first_name, self.patronym))
 
+    def clean_total_accrued(self, safe=False):
+        self.total_accrued = Decimal(0)
+        if not safe:
+            self.save()
+
 
 
 class Position(models.Model):

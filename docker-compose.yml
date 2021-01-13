@@ -1,15 +1,17 @@
-version: '3'
+version: "3"
 
 services:
   db:
     image: postgres
     env_file: ./.envs/postgres
     container_name: my-little-office_db
-    volumes: 
+    networks: 
+      - my-little-office
+    volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
-  
-  django:
+
+  django: &django
     build:
       context: .
       dockerfile: Dockerfile
@@ -20,11 +22,33 @@ services:
     env_file:
       - ./.envs/postgres
       - ./.envs/django
+    networks: 
+      - my-little-office
     volumes:
       - .:/usr/src/app:z
     ports:
       - "8000:8000"
-    command: /usr/src/app/.start.sh
+    command: /usr/src/app/start.sh
 
-volumes: 
+  redis:
+    image: redis:6.0
+    networks: 
+      - my-little-office
+
+  celery_worker:
+    <<: *django
+    image: my-little-office_celery_worker
+    depends_on:
+      - redis
+    container_name: my-little-office_celery_worker
+    command: /usr/src/app/compose/celery_worker.sh
+    ports: []
+  
+
+
+
+volumes:
   postgres_data:
+
+networks: 
+  my-little-office:

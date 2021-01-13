@@ -6,11 +6,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 
 from .models import Employee, Position
-
-
-def clear_total_accrued(modeladmin, request, queryset):
-    queryset.update(total_accrued=Decimal(0))
-clear_total_accrued.short_description = _('Clear field "total accrued"')
+from .tasks import clean_total_accrued
 
 
 @admin.register(Employee)
@@ -27,9 +23,10 @@ class EmployeeAdmin(admin.ModelAdmin):
         'total_accrued',
         'user'
     )
-    list_display = ('full_name', 'chief_link', 'position', 'salary', 'total_accrued')
+    list_display = ('full_name', 'chief_link',
+                    'position', 'salary', 'total_accrued')
     list_filter = ('position', 'level')
-    actions = (clear_total_accrued, )
+    actions = ['clear_total_accrued']
     date_hierarchy = 'employment_date'
 
     def chief_link(self, obj):
@@ -43,12 +40,18 @@ class EmployeeAdmin(admin.ModelAdmin):
     chief_link.short_description = _('chief')
 
     def clear_total_accrued(self, request, queryset):
-        queryset.update(total_accrued=Decimal(0))
+        ASYNC_EDGE = 20
+        if queryset.count() <= ASYNC_EDGE:
+            queryset.update(total_accrued=Decimal(0))
+        else:
+            for e in queryset:
+                clean_total_accrued(e.pk)
     clear_total_accrued.short_description = _('Clear field "total accrued"')
 
     def get_queryset(self, request):
         return super().get_queryset(request)\
             .prefetch_related('parent', 'position')
+
 
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):

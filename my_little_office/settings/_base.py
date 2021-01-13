@@ -153,3 +153,11 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend', 
     ),
 }
+
+CELERY_TIMEZONE = "Europe/Minsk"
+CELERY_TASK_TIME_LIMIT = 5 * 60
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULTS_BACKEND = CELERY_BROKER_URL
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["json"]
