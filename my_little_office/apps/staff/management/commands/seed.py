@@ -37,6 +37,10 @@ class Command(BaseCommand):
                 position=choice(positions),
                 salary=Decimal(randint(10000, 50000) / 100),
                 parent=parent,
+                # Lil trick right here
+                # manager cannot make `bulk_create` cause there are not null field
+                # so, we make some defalt value and when all data populated -- 
+                # call `rebuild` to recreate the tree
                 lft=1,
                 rght=1,
                 tree_id=parent.tree_id,
@@ -79,6 +83,7 @@ class Command(BaseCommand):
         level3 = create_level_staff(3, options['staff_l3'], level2, positions)
         level4 = create_level_staff(4, options['staff_l4'], level3, positions)
 
+        # Do not forget `rebuild` tree to make mptt work properly`
         Employee.objects.rebuild()
 
         print('done')
