@@ -45,6 +45,7 @@ class Employee(MPTTModel):
         ordering = ['tree_id', 'lft']
         verbose_name = _('Employee')
         verbose_name_plural = _('Staff')
+        permissions = [('can_view_api', 'Can view API')]
 
     class MPTTMeta:
         order_insertion_by = ('second_name', 'first_name')
