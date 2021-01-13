@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-13 23:08+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: my_little_office/apps/staff/admin.py:13
+#: my_little_office/apps/staff/admin.py:47
+msgid "Clear field \"total accrued\""
+msgstr "Очистить поле \"всего начислено\""
+
+#: my_little_office/apps/staff/admin.py:43
+#: my_little_office/apps/staff/models.py:42
+msgid "chief"
+msgstr "начальник"
+
+#: my_little_office/apps/staff/apps.py:7
+msgid "staff"
+msgstr "сотрудник"
+
+#: my_little_office/apps/staff/models.py:13
+msgid "second name"
+msgstr "фамилия"
+
+#: my_little_office/apps/staff/models.py:14
+msgid "first name"
+msgstr "имя"
+
+#: my_little_office/apps/staff/models.py:15
+msgid "patronym"
+msgstr "отчество"
+
+#: my_little_office/apps/staff/models.py:19
+msgid "position"
+msgstr "должность"
+
+#: my_little_office/apps/staff/models.py:20
+msgid "employment date"
+msgstr "дата приёма"
+
+#: my_little_office/apps/staff/models.py:22
+msgid "salary"
+msgstr "заработная плата"
+
+#: my_little_office/apps/staff/models.py:27
+msgid "total accrued"
+msgstr "всего начислено"
+
+#: my_little_office/apps/staff/models.py:31
+msgid "Amount of all accrued salary since start of recording"
+msgstr "Сумма всей начисленной зарплаты с начала работы"
+
+#: my_little_office/apps/staff/models.py:41
+msgid "childrem"
+msgstr "childrem"
+
+#: my_little_office/apps/staff/models.py:46
+msgid "Employee"
+msgstr "Сотрудник"
+
+#: my_little_office/apps/staff/models.py:47
+msgid "Staff"
+msgstr "Сотрудники"
+
+#: my_little_office/apps/staff/models.py:69
+msgid "name"
+msgstr "имя"
+
+#: my_little_office/apps/staff/models.py:72
+msgid "Position"
+msgstr "Должность"
+
+#: my_little_office/apps/staff/models.py:73
+msgid "Positions"
+msgstr "Должности"
+
+#: my_little_office/settings/_base.py:125
+msgid "English"
+msgstr "Английский"
+
+#: my_little_office/settings/_base.py:126
+msgid "Russian"
+msgstr "Русский"
+
+#: my_little_office/urls.py:29
+msgid "My Little Office Administration"
+msgstr "Администрация My Little Office"
