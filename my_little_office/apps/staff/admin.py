@@ -19,7 +19,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     fields = (
         'second_name',
         'first_name',
-        'patronim',
+        'patronym',
         'parent',
         'position',
         'employment_date',
@@ -47,7 +47,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     clear_total_accrued.short_description = _('Clear field "total accrued"')
 
     def get_queryset(self, request):
-        return = super().get_queryset(request)\
+        return super().get_queryset(request)\
             .prefetch_related('parent', 'position')
 
 @admin.register(Position)

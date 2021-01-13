@@ -12,7 +12,7 @@ from mptt.fields import TreeForeignKey
 class Employee(MPTTModel):
     second_name = models.CharField(_('second name'), max_length=150)
     first_name = models.CharField(_('first name'), max_length=150)
-    patronim = models.CharField(_('patronim'), max_length=150, blank=True)
+    patronym = models.CharField(_('patronym'), max_length=150, blank=True)
     position = models.ForeignKey(
         'Position',
         on_delete=models.CASCADE,
@@ -54,14 +54,14 @@ class Employee(MPTTModel):
         return ''.join(('<Employee: ',
                         self.second_name, ' ',
                         self.first_name, ' ',
-                        self.patronim, '>'))
+                        self.patronym, '>'))
 
     def __str__(self):
         return self.full_name
 
     @property
     def full_name(self) -> str:
-        return ' '.join((self.second_name, self.first_name, self.patronim))
+        return ' '.join((self.second_name, self.first_name, self.patronym))
 
 
 

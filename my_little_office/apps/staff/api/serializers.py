@@ -18,7 +18,7 @@ class ChiefEmployeeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Employee
-        fields = ('id', 'url', 'first_name', 'second_name', 'patronim')
+        fields = ('id', 'url', 'first_name', 'second_name', 'patronym')
 
 class EmployeeSerializer(serializers.ModelSerializer):
     chief = ChiefEmployeeSerializer(many=False, source='parent')
@@ -31,7 +31,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
             'url',
             'second_name',
             'first_name',
-            'patronim',
+            'patronym',
             'chief',
             'position',
             'level',

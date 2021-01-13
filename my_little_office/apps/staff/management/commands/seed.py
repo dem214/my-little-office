@@ -27,12 +27,13 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         def gen_employee(positions, parents):
+            """Generate employee ready to creating throgh comprehension."""
             names = fake.name().split(' ')
             parent = choice(parents)
             return Employee(
                 second_name=names[-3],
                 first_name=names[-2],
-                patronim=names[-1],
+                patronym=names[-1],
                 position=choice(positions),
                 salary=Decimal(randint(10000, 50000) / 100),
                 parent=parent,
@@ -42,8 +43,8 @@ class Command(BaseCommand):
                 level=parent.level+1,
             )
 
-        def create_level_staff(amount, parents, positions):
-            print(f'populating {amount} level 1 staff.')
+        def create_level_staff(level, amount, parents, positions):
+            print(f'populating {amount} level {level} staff.')
             staff_presave = []
             for i in range(amount):
                 staff_presave.append(gen_employee(positions, parents))
@@ -67,16 +68,16 @@ class Command(BaseCommand):
             level0.append(Employee.objects.create(
                 second_name=names[-3],
                 first_name=names[-2],
-                patronim=names[-1],
+                patronym=names[-1],
                 position=choice(positions),
                 salary=Decimal(randint(10000, 100000) / 100),
             ))
         print(f'populated: {", ".join(e.full_name for e in level0)}')
 
-        level1 = create_level_staff(options['staff_l1'], level0, positions)
-        level2 = create_level_staff(options['staff_l2'], level1, positions)
-        level3 = create_level_staff(options['staff_l3'], level2, positions)
-        level4 = create_level_staff(options['staff_l4'], level3, positions)
+        level1 = create_level_staff(1, options['staff_l1'], level0, positions)
+        level2 = create_level_staff(2, options['staff_l2'], level1, positions)
+        level3 = create_level_staff(3, options['staff_l3'], level2, positions)
+        level4 = create_level_staff(4, options['staff_l4'], level3, positions)
 
         Employee.objects.rebuild()
 
