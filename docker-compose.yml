@@ -4,19 +4,17 @@ services:
   db:
     image: postgres
     env_file: ./.envs/postgres
-    container_name: my-little-office_db
     networks: 
       - my-little-office
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
 
-  django: &django
+  django:
     build:
       context: .
       dockerfile: Dockerfile
     image: my-little-office_django
-    container_name: my-little-office_django
     depends_on:
       - db
     env_file:
@@ -36,15 +34,40 @@ services:
       - my-little-office
 
   celery_worker:
-    <<: *django
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: my-little-office_celery_worker
     depends_on:
       - redis
-    container_name: my-little-office_celery_worker
+      - db
+    env_file:
+      - ./.envs/postgres
+      - ./.envs/django
+    networks: 
+      - my-little-office
+    volumes:
+      - .:/usr/src/app:z
     command: /usr/src/app/compose/celery_worker.sh
     ports: []
-  
 
+  celery_beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-little-office_celery_beat
+    depends_on:
+      - redis
+      - db
+    env_file:
+      - ./.envs/postgres
+      - ./.envs/django
+    networks: 
+      - my-little-office
+    volumes:
+      - .:/usr/src/app:z
+    command: /usr/src/app/compose/celery_beat.sh
+    ports: []
 
 
 volumes:

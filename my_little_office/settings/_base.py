@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'django_filters',
+    'django_celery_beat',
     # Project apps
     'my_little_office.apps.staff.apps.StaffConfig',
 ]
@@ -157,7 +158,15 @@ REST_FRAMEWORK = {
 CELERY_TIMEZONE = "Europe/Minsk"
 CELERY_TASK_TIME_LIMIT = 5 * 60
 CELERY_BROKER_URL = "redis://redis:6379/0"
-CELERY_RESULTS_BACKEND = CELERY_BROKER_URL
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_SCHEDULE = [
+    {
+    'my_little_office.apps.staff.tasks.accrue_salary': {
+        'task': 'my_little_office.apps.staff.tasks.accrue_salary',
+        'schedule': 10.0
+    },
+    }
+]
