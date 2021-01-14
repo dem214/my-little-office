@@ -41,6 +41,7 @@ services:
     depends_on:
       - redis
       - db
+      - django
     env_file:
       - ./.envs/postgres
       - ./.envs/django
@@ -59,6 +60,7 @@ services:
     depends_on:
       - redis
       - db
+      - django
     env_file:
       - ./.envs/postgres
       - ./.envs/django

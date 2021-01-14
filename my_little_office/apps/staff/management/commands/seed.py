@@ -41,6 +41,7 @@ class Command(BaseCommand):
                 # manager cannot make `bulk_create` cause there are not null field
                 # so, we make some defalt value and when all data populated -- 
                 # call `rebuild` to recreate the tree
+                # People talk about this at https://stackoverflow.com/questions/12661488/how-optimize-adding-new-nodes-in-django-mptt
                 lft=1,
                 rght=1,
                 tree_id=parent.tree_id,
