@@ -38,6 +38,6 @@ To deploy app, you need [`docker`](https://docs.docker.com/engine/install/) and 
 
 * To use API of staff, user must have a `Staff | Employee | Can view API`
 
-* Seed DB by prompt command `docker-compose run django python manage.py seed [--posititon=15 --staff_l0=1 --staff_l1=5 --staff_l2=10 --staff_l3=15  --staff_l4=50 ]`
+* Seed DB by prompt command `docker-compose run django python manage.py seed [--position=15 --staff_l0=1 --staff_l1=5 --staff_l2=10 --staff_l3=15  --staff_l4=50 ]`
 
 
