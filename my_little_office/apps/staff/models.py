@@ -4,10 +4,10 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from django.utils.timezone import now
-from django.urls import reverse
 
 from mptt.models import MPTTModel
 from mptt.fields import TreeForeignKey
+
 
 class Employee(MPTTModel):
     second_name = models.CharField(_('second name'), max_length=150)
@@ -69,7 +69,6 @@ class Employee(MPTTModel):
             self.save()
 
 
-
 class Position(models.Model):
     name = models.CharField(_('name'), max_length=150, blank=True)
 
@@ -82,4 +81,3 @@ class Position(models.Model):
 
     def __str__(self):
         return self.name
-

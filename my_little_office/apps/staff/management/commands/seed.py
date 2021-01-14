@@ -2,7 +2,6 @@ from random import choice, randint
 from decimal import Decimal
 
 from django.core.management.base import BaseCommand
-from django.db.transaction import atomic
 
 from ...models import Employee, Position
 
@@ -38,10 +37,10 @@ class Command(BaseCommand):
                 salary=Decimal(randint(10000, 50000) / 100),
                 parent=parent,
                 # Lil trick right here
-                # manager cannot make `bulk_create` cause there are not null field
-                # so, we make some defalt value and when all data populated -- 
-                # call `rebuild` to recreate the tree
-                # People talk about this at https://stackoverflow.com/questions/12661488/how-optimize-adding-new-nodes-in-django-mptt
+                # manager cannot make `bulk_create` cause there are not null
+                # field so, we make some defalt value and when all
+                # data populated -- call `rebuild` to recreate the tree
+                # noqa, People talk about this at https://stackoverflow.com/questions/12661488/how-optimize-adding-new-nodes-in-django-mptt
                 lft=1,
                 rght=1,
                 tree_id=parent.tree_id,
@@ -82,7 +81,7 @@ class Command(BaseCommand):
         level1 = create_level_staff(1, options['staff_l1'], level0, positions)
         level2 = create_level_staff(2, options['staff_l2'], level1, positions)
         level3 = create_level_staff(3, options['staff_l3'], level2, positions)
-        level4 = create_level_staff(4, options['staff_l4'], level3, positions)
+        create_level_staff(4, options['staff_l4'], level3, positions)
 
         # Do not forget `rebuild` tree to make mptt work properly`
         Employee.objects.rebuild()
