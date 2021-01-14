@@ -9,18 +9,26 @@ from ..models import Employee
 from .serializers import EmployeeSerializer
 from .permissions import CanViewAPIPermission
 
+
 class EmployeeViewSet(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [IsAuthenticated & CanViewAPIPermission]    
+    """View sets to make safe actions with employee info.
+
+    Contains `retireve` `list` views.
+    Also, realized filter by `level` field by query string.
+    """
+    permission_classes = [IsAuthenticated & CanViewAPIPermission]
     queryset = Employee.objects.select_related('position', 'parent')
     serializer_class = EmployeeSerializer
     filterset_fields = ('level', )
 
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 def self_employee_view(request):
+    """View to self viewing."""
     try:
         employee = Employee.objects.get(user=request.user)
     except Employee.DoesNotExist:
         raise NotFound
-    return Response(EmployeeSerializer(employee, context={'request': request}).data)
-
+    return Response(EmployeeSerializer(
+        employee, context={'request': request}).data)

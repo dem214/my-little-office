@@ -2,8 +2,9 @@ from rest_framework import serializers
 
 from ..models import Employee, Position
 
-class PositionSerializer(serializers.ModelSerializer):
 
+class PositionSerializer(serializers.ModelSerializer):
+    """Sub serializer to add nested position data to employee serializer."""
     class Meta:
         model = Position
         fields = ('id', 'name')
@@ -15,10 +16,14 @@ class PositionSerializer(serializers.ModelSerializer):
 
 
 class ChiefEmployeeSerializer(serializers.HyperlinkedModelSerializer):
+    """Sub serializer.
 
+    Adds nested chief person data to employee serializer.
+    """
     class Meta:
         model = Employee
         fields = ('id', 'url', 'first_name', 'second_name', 'patronym')
+
 
 class EmployeeSerializer(serializers.ModelSerializer):
     chief = ChiefEmployeeSerializer(many=False, source='parent')
@@ -37,4 +42,5 @@ class EmployeeSerializer(serializers.ModelSerializer):
             'level',
             'employment_date',
             'salary',
-            'total_accrued')
+            'total_accrued'
+        )

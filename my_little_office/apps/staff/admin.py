@@ -30,6 +30,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     date_hierarchy = 'employment_date'
 
     def chief_link(self, obj):
+        """Generate href to chief person."""
         if obj.parent:
             return format_html(
                 '<a  href="{0}" >{1}</a>&nbsp;',
@@ -40,6 +41,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     chief_link.short_description = _('chief')
 
     def clear_total_accrued(self, request, queryset):
+        """Add action to clear field `total_accrued` at selected staff."""
         ASYNC_EDGE = 20
         if queryset.count() <= ASYNC_EDGE:
             queryset.update(total_accrued=Decimal(0))
