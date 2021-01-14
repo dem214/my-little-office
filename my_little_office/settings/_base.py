@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Third party apps
     'mptt',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_spectacular',
     'django_filters',
     'django_celery_beat',

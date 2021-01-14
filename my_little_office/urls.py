@@ -31,7 +31,7 @@ admin.site.site_header = _('My Little Office Administration')
 urlpatterns = [
     path('', RedirectView.as_view(pattern_name = 'admin:index'), name='index'),
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/', include('my_little_office.api_router')),
     path('api/schema/', include([
         path('', SpectacularAPIView.as_view(), name='schema'),
         path('swagger-ui/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
