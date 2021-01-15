@@ -26,7 +26,7 @@ To deploy app, you need [`docker`](https://docs.docker.com/engine/install/) and 
 
 * API can be accessed by `/api/`
 
-    * There are helpful schema: `/api/swagger-ui/`
+    * There are helpful schema: `/api/schema/swagger-ui/`
 
     * List of all users: `/api/staff/`
 
